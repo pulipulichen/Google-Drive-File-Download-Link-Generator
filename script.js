@@ -37,7 +37,9 @@ $(function () {
 
         var _create_link = function (_link, _format, _image) {
             if (_image !== undefined) {
-                _image = '<i class="fa ' + _image + '" aria-hidden="true"></i>';
+                //_image = '<i class="fa ' + _image + '" aria-hidden="true"></i>';
+                // <i class="external alternate icon"></i>
+                _image = '<i class="' + _image + ' icon"></i>'
             }
             
             var _msg = '下載' + _format + '格式';
@@ -51,60 +53,99 @@ $(function () {
                 _msg = "預覽播放";
             }
             
+            /*
             _output.append('<span>' 
                     + '<a href="' + _link + '" target="_blank">' + _image + _msg +  '</a>' 
                     + '<button type="button" class="ui button copy">COPY</button>'
                     + '<a class="shorten-link" href="https://u.nu/?url=' + encodeURIComponent( _link ) + '" target="_blank"><button type="button" class="ui button shorten">SHORTEN</button></a>'
                     + '</span>');
             _output.append('<input type="text" style="width: 100%;" value="' + _link + '" onfocus="this.select()" />');
+            */
+            var _ele = $(`
+            <div class="field link-row">
+            <label><a class="main-link" href="` + _link + `" target="_blank">` + _image + _msg + `</a></label>
+<div class="three ui basic labeled icon  buttons">
+  <a class="ui blue button copy">
+    <i class="copy icon"></i>
+    COPY LINK
+  </a>
+  <a class="ui button" href="https://u.nu/api.php?action=shorturl&format=simple&url=` + encodeURIComponent( _link ) + `" target="_blank">
+    <i class="compress icon"></i>
+    SHORTEN LINK
+  </a>
+  <a class="ui button" href="` + _link + `" target="_blank">
+    <i class="external alternate icon"></i>
+    OPEN ` + _format + `
+  </a>
+</div>
+<input type="text" class="display-link" value="` + _link + `" onfocus="this.select()" />
+<input type="text" class="display-link display-link-shorten-link" value="" onfocus="this.select()" />
+</div>`)
+          
+          // <a class="ui button" href="https://u.nu/api.php?action=shorturl&format=simple&url=` + encodeURIComponent( _link ) + `" target="_blank">SHORTEN LINK</a>
+           
+            _output.append(_ele)
             
-            _output.find("button.copy").click(function () {
-                var _val = $(this).parent().next().val().trim();
-                //console.log(_val);
+            _ele.find(".copy").click(function () {
+                var _val = $(this).parents('.field:first').find('.main-link').attr('href');
+                console.log(_val);
                 PULI_UTIL.clipboard.copy(_val);
             });
             
-            _output.find("button.shorten").click(function () {
-                var _val = $(this).parent().next().val().trim();
+            /*
+            _ele.find(".shorten").click(function () {
+              var _link_row = $(this).parents('.field:first')
+                var _val = _link_row.find('.main-link').attr('href');
+                var _display_shorten_link = _link_row.find('.display-link-shorten-link')
+                var _url = 'https://u.nu/api.php?action=shorturl&format=simple&url=' + encodeURIComponent( _link )
+                
+                $.get(_url, function (_short_url) {
+                  _display_shorten_link.val(_short_url)
+                  _link_row.addClass('show-shorten-link')
+                })
+                //_display_shorten_link.val(_url)
+                //_link_row.addClass('show-shorten-link')
+               
                 //console.log(_val);
                 //PULI_UTIL.clipboard.copy(_val);
             });
+            */
         };
 
         _output.empty();
         _output.append('<hr />')
         switch (_type) {
             case "document":
-                _create_link("https://docs.google.com/document/d/" + _id + "/preview", "Preview", " fa-play-circle");
-                _create_link("https://docs.google.com/document/d/" + _id + "/copy", "Copy", "fa-clone");
-                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=pdf", "PDF", "fa-file-pdf-o");
-                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=doc", "Word", "fa-file-word-o");
-                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=odt", "OpenDocument Text", "fa-file-text-o");
-                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=rtf", "Rich Text Format", "fa-file-text-o");
-                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=txt", "Text", "fa-file-text-o");
-                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=html", "HTML", "fa-html5");
-                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=epub", "EPUB", "fa-book");
+                _create_link("https://docs.google.com/document/d/" + _id + "/preview", "Preview", "play circle");
+                _create_link("https://docs.google.com/document/d/" + _id + "/copy", "Copy", "copy");
+                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=pdf", "PDF", "file pdf outline");
+                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=doc", "Word", "file word outline");
+                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=odt", "OpenDocument Text", "file alternate");
+                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=rtf", "Rich Text Format", "file alternate");
+                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=txt", "Text", "file alternate outline");
+                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=html", "HTML", "html5");
+                _create_link("https://docs.google.com/document/d/" + _id + "/export?format=epub", "EPUB", "book");
                 break;
             case "spreadsheets":
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/preview", "Preview", " fa-play-circle");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/copy", "Copy", "fa-clone");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=pdf", "PDF", "fa-file-pdf-o");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=xlsx", "Excel", "fa-file-excel-o");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=ods", "OpenDocument Spreadsheet", "fa-file-o");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=csv", "CSV", "fa-file-text-o");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=csv", "TSV", "fa-file-text-o");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/preview", "Preview", "play circle");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/copy", "Copy", "copy");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=pdf", "PDF", "file pdf outline");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=xlsx", "Excel", "file excel outline");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=ods", "OpenDocument Spreadsheet", "file alternate");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=csv", "CSV", "file alternate outline");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=csv", "TSV", "file alternate outline");
                 break;
             case "presentation":
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/preview", "Preview", " fa-play-circle");
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/copy", "Copy", "fa-clone");
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/present", "Present", "fa-play-circle-o");
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pdf", "PDF", "fa-file-pdf-o");
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pptx", "Power Point", "fa-file-powerpoint-o");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export/odp", "OpenDocument Presentation", "fa-file-o");
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/txt", "Text", "fa-file-text-o");
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/jpeg", "JPEG", "fa-picture-o");
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/png", "PNG", "fa-picture-o");
-                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/svg", "SVG", "fa-picture-o");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/preview", "Preview", "play circle");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/present", "Present", "play circle");    
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/copy", "Copy", "copy");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pdf", "PDF", "file pdf outline");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pptx", "Power Point", "file powerpoint outline");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export/odp", "OpenDocument Presentation", "file alternate");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/txt", "Text", "file alternate outline");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/jpeg", "JPEG", "file image outline");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/png", "PNG", "file image outline");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/svg", "SVG", "file image outline");
                 break;
             default:
                 _create_link("https://drive.google.com/uc?export=download&id=" + _id, "原始", "fa-file-o");
