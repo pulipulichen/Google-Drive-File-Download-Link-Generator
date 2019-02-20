@@ -79,7 +79,6 @@ $(function () {
   </a>
 </div>
 <input type="text" class="display-link" value="` + _link + `" onfocus="this.select()" />
-<input type="text" class="display-link display-link-shorten-link" value="" onfocus="this.select()" />
 </div>`)
           
           // <a class="ui button" href="https://u.nu/api.php?action=shorturl&format=simple&url=` + encodeURIComponent( _link ) + `" target="_blank">SHORTEN LINK</a>
@@ -148,7 +147,7 @@ $(function () {
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/svg", "SVG", "file image outline");
                 break;
             default:
-                _create_link("https://drive.google.com/uc?export=download&id=" + _id, "原始", "fa-file-o");
+                _create_link("https://drive.google.com/uc?export=download&id=" + _id, "原始", "file alternate outline");
         }
     };
 

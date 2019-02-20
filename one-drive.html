@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>One Drive File Download Link Generator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css" />
+        
+<link rel="stylesheet" href="lib/semantic-ui/semantic.min.css" />
+    </head>
+    <body>
+<script src="lib/jquery.min.js"></script>
+<script src="lib/semantic-ui/semantic.min.js"></script>
+<script src="lib/clipboard.min.js"></script>
+<script src="lib/puli-util.clipboard.js"></script>
+
+<script src="script.js"></script>
+<script src="script-onedrive.js"></script>
+
+<!-- ------------------------------------------------------------ -->
+
+<form class="ui form">
+  <div class="field">
+    <label>OneDrive embedded Code (<a href="//blog.pulipuli.info/2016/09/google-google-drive-file-download-link.html" target="help">HELP</a>) </label>
+    <textarea id="source" style="width: 100%;font-size: 1.5em;" onfocus="this.select()"
+       value="" 
+       placeholder="<iframe src=..."></textarea>
+  </div>
+
+
+<div id="output"></div>
+
+</form>
+
+<!-- ------------------------------------------------------------ -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-37178375-7', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    </body>
+</html>
