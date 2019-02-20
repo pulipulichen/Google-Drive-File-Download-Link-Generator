@@ -155,8 +155,8 @@ $(function () {
     $("#google_drive_share_link_20160926").change(_generate_download_link);
     $("#google_drive_share_link_20160926").keyup(_generate_download_link);
     
-  $("#google_drive_share_link_20160926").val('https://docs.google.com/spreadsheets/d/1dOFyNqpjL5K7k-26K-C5wfArAruiYoXcyuXYCkTpbbc/edit?usp=sharing')
-  _generate_download_link();
+  //$("#google_drive_share_link_20160926").val('https://docs.google.com/spreadsheets/d/1dOFyNqpjL5K7k-26K-C5wfArAruiYoXcyuXYCkTpbbc/edit?usp=sharing')
+  //_generate_download_link();
     
     
 });
