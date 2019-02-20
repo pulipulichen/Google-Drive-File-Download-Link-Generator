@@ -50,7 +50,7 @@ $(function () {
     <i class="copy icon"></i>
     COPY LINK
   </a>
-  <a class="ui button" href="https://u.nu/?url=` + encodeURIComponent( _link ) + `" target="_blank">
+  <a class="ui button" href="https://tinyurl.com/create.php?url=` + encodeURIComponent( _link ) + `" target="_blank">
     <i class="compress icon"></i>
     SHORTEN LINK
   </a>
