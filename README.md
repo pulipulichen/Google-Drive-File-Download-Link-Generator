@@ -8,3 +8,5 @@ https://pulipulichen.github.io/Google-Drive-File-Download-Link-Generator/
 https://docs.google.com/spreadsheets/d/1dOFyNqpjL5K7k-26K-C5wfArAruiYoXcyuXYCkTpbbc/edit?usp=sharing
 
 https://fontawesome.com/icons
+
+javascript:void(location.href='https://tinyurl.com/create.php?url='+encodeURIComponent(location.href))
