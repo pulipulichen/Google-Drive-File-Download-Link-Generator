@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Google Drive File Download Link Generator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css" />
+        
+<link rel="stylesheet" href="//pulipulichen.github.io/blogger/posts/2016/12/semantic/semantic.min.css" />
+<link rel="stylesheet" href="//fontawesome.io/assets/font-awesome/css/font-awesome.css" />
+    </head>
+    <body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="//pulipulichen.github.io/blogger/posts/2016/12/semantic/semantic.min.js"></script>
+<script src="//pulipulichen.github.io/blogger/posts/2016/12/clipboard.min.js"></script>
+<script src="puli-util.clipboard.js"></script>
+<!-- <script src="//cdn.tinymce.com/4/tinymce.min.js"></script> -->
+
+<script src="script.js"></script>
+
+<!-- ------------------------------------------------------------ -->
+
+
+<!--
+<input type="text" id="google_drive_share_link_20160926" style="width: 100%;font-size: 1.5em;" 
+       value="https://docs.google.com/document/d/1HRAvOD8zdX7w6uB15Odd7OpWcZXYG3hvy8BG2TPCmmg/edit?usp=sharing" />
+-->
+
+<form class="ui form">
+  <div class="field">
+    <label>Google Drive public share link</label>
+    <input type="text" id="google_drive_share_link_20160926" style="width: 100%;font-size: 1.5em;" 
+       value="" 
+       placeholder="請輸入Google雲端硬碟的共用連結，例如：https://docs.google.com/presentation/d/1lksB_YpaNv3ZRMe5IysLoIVvJwiNxX_T95vkzYWGEiA/edit?usp=sharing" />
+  </div>
+
+
+<div id="google_drive_download_link_20160926"></div>
+
+</form>
+
+<!-- ------------------------------------------------------------ -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-37178375-7', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+    </body>
+</html>
