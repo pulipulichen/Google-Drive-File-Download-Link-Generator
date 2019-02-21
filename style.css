@@ -74,6 +74,7 @@ table td {
 #google_drive_download_link_20160926 {
     overflow-y: auto;
     max-height: calc(100vh - 122px);
+    padding-right: 0.5rem;
 }
 
 #google_drive_download_link_20160926 .link-row .display-link-shorten-link {
@@ -90,4 +91,15 @@ table td {
 
 #google_drive_download_link_20160926 .link-row.show-shorten-link .display-link {
   width: calc(50% - 2px);
+}
+
+#google_drive_download_link_20160926 .link-row .ui.three.buttons,
+#output .link-row .ui.three.buttons {
+  border-radius: .28571429rem .28571429rem 0 0 !important;
+  border-bottom-width: 0;
+}
+
+#google_drive_download_link_20160926 .link-row .display-link,
+#output .link-row .display-link {
+  border-radius: 0 0 .28571429rem .28571429rem !important;
 }

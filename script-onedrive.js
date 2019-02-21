@@ -100,8 +100,8 @@ $(function () {
     $("#source").change(_generate_download_link);
     $("#source").keyup(_generate_download_link);
     
-  $("#source").val(`<iframe src="https://onedrive.live.com/embed?cid=6BA2FBE8DE6717A9&resid=6BA2FBE8DE6717A9%214820&authkey=AE1IF5SimCEAofI&em=2" width="476" height="288" frameborder="0" scrolling="no"></iframe>`)
-  _generate_download_link();
+  //$("#source").val(`<iframe src="https://onedrive.live.com/embed?cid=6BA2FBE8DE6717A9&resid=6BA2FBE8DE6717A9%214820&authkey=AE1IF5SimCEAofI&em=2" width="476" height="288" frameborder="0" scrolling="no"></iframe>`)
+  //_generate_download_link();
     
     
 });
