@@ -9,17 +9,25 @@ $(function () {
         // 取得ID
         // ----------------------------
 
+        //if (_link.indexOf("https://onedrive.live.com/embed?cid=") > 0) {
+          // 先找到/d/的位置
+          var _startPos = _link.indexOf("https://onedrive.live.com/embed?cid=");
+          if (_startPos === -1) {
+              _output.html("This is not OneDrive embedded code.");
+              return;
+          }
 
-        // 先找到/d/的位置
-        var _startPos = _link.indexOf("https://onedrive.live.com/embed?cid=");
-        if (_startPos === -1) {
-            _output.html("This is not OneDrive embedded code.");
-            return;
-        }
+          var _endPos = _link.indexOf('" width="', _startPos);
 
-        var _endPos = _link.indexOf('" width="', _startPos);
-
-        _link = _link.slice(_startPos, _endPos).replace('/embed?cid=', '/download?cid=');
+          _link = _link.slice(_startPos, _endPos)
+        //}
+        //else {
+        //  _link = _link.replace('https://onedrive.live.com/edit.aspx?cid=', 'https://onedrive.live.com/embed?cid=')
+        //}
+        
+        var _preview_link = _link
+        var _edit_link = _link.replace('/embed?cid=', '/edit.aspx?cid=');
+        var _download_link = _link.replace('/embed?cid=', '/download?cid=');
 
         //console.log(_link);
         //console.log(_type);
@@ -32,7 +40,8 @@ $(function () {
                 _image = '<i class="' + _image + ' icon"></i>'
             }
             
-            var _msg = '下載' + _format + '格式';
+            //var _msg = '下載' + _format + '格式';
+            var _msg = _format;
             
             /*
             _output.append('<span>' 
@@ -56,7 +65,7 @@ $(function () {
   </a>
   <a class="ui button" href="` + _link + `" target="_blank">
     <i class="external alternate icon"></i>
-    OPEN ` + _format + `
+    OPEN
   </a>
 </div>
 <input type="text" class="display-link" value="` + _link + `" onfocus="this.select()" />
@@ -94,14 +103,17 @@ $(function () {
 
         _output.empty();
         _output.append('<hr />')
-        _create_link(_link, "File Download Link", "file alternate outline")
+        _create_link(_download_link, "Download", "file alternate outline")
+        _create_link(_preview_link, "Preview", "eye")
+        _create_link(_edit_link, "Edit", "edit outline")
     };
 
     $("#source").change(_generate_download_link);
     $("#source").keyup(_generate_download_link);
     
   //$("#source").val(`<iframe src="https://onedrive.live.com/embed?cid=6BA2FBE8DE6717A9&resid=6BA2FBE8DE6717A9%214820&authkey=AE1IF5SimCEAofI&em=2" width="476" height="288" frameborder="0" scrolling="no"></iframe>`)
-  //_generate_download_link();
-    
-    
+  //$("#source").val(`<iframe src="https://onedrive.live.com/embed?cid=6BA2FBE8DE6717A9&resid=6BA2FBE8DE6717A9%214766&authkey=AOG3xNHa_V53zNY&em=2" width="476" height="288" frameborder="0" scrolling="no"></iframe>`)
+  //$('#source').val('https://onedrive.live.com/edit.aspx?cid=6ba2fbe8de6717a9&page=view&resid=6BA2FBE8DE6717A9!4816&parId=6BA2FBE8DE6717A9!4701&app=Word')
+  $('#source').val(`<iframe src="https://onedrive.live.com/embed?cid=6BA2FBE8DE6717A9&resid=6BA2FBE8DE6717A9%214816&authkey=AGpP1-5EHiIdWEM&em=2" width="476" height="288" frameborder="0" scrolling="no"></iframe>`)
+  _generate_download_link();
 });
