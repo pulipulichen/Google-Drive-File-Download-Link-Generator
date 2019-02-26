@@ -8,8 +8,10 @@ $(function () {
         // ----------------------------
         // 取得ID
         // ----------------------------
+        var link_type = 'iframe'
+        var _preview_link, _edit_link, _download_link
 
-        //if (_link.indexOf("https://onedrive.live.com/embed?cid=") > 0) {
+        if (_link.indexOf("https://onedrive.live.com/embed?cid=") > 0) {
           // 先找到/d/的位置
           var _startPos = _link.indexOf("https://onedrive.live.com/embed?cid=");
           if (_startPos === -1) {
@@ -20,15 +22,24 @@ $(function () {
           var _endPos = _link.indexOf('" width="', _startPos);
 
           _link = _link.slice(_startPos, _endPos)
-        //}
+          
+          _preview_link = _link
+          _edit_link = _link.replace('/embed?cid=', '/edit.aspx?cid=');
+          _download_link = _link.replace('/embed?cid=', '/download?cid=');
+        }
+        else if (_link.indexOf('?width=') > 0 && _link.indexOf('&height=') > 0) {
+          // https://4rk0pa.dm.files.1drv.com/y4ms_ADLxxqPWIyrS1kTKVHtprFyGBNqQ9jhAF2RGrvLYlAh82HgbGaPX5JURmk98GJFJo3MH07zy3X1e9Uuj3VkTrw1yWy9QNcV3OfCVAHsgKPYT6Tmb6fajHNrjrCLOEGG1nORMX2qIoRucgoX5O1N4QmlOdjKTUrqDuzyQx3kV_SrpRqOtmg_W757w0hR2jx?width=55&height=55&cropmode=none
+          // 
+          link_type = 'image'
+        }
+        else {
+          _output.html("This is not OneDrive embedded code.");
+          return;
+        }
         //else {
         //  _link = _link.replace('https://onedrive.live.com/edit.aspx?cid=', 'https://onedrive.live.com/embed?cid=')
         //}
         
-        var _preview_link = _link
-        var _edit_link = _link.replace('/embed?cid=', '/edit.aspx?cid=');
-        var _download_link = _link.replace('/embed?cid=', '/download?cid=');
-
         //console.log(_link);
         //console.log(_type);
         //console.log(_id);
@@ -103,9 +114,15 @@ $(function () {
 
         _output.empty();
         _output.append('<hr />')
-        _create_link(_download_link, "Download", "file alternate outline")
-        _create_link(_preview_link, "Preview", "eye")
-        _create_link(_edit_link, "Edit", "edit outline")
+        
+        if (link_type === 'iframe') {
+          _create_link(_download_link, "Download", "file alternate outline")
+          _create_link(_preview_link, "Preview", "eye")
+          _create_link(_edit_link, "Edit", "edit outline")
+        }
+        else if (link_type === 'image') {
+          _create_link(_link, "Download", "file alternate outline")
+        }
     };
 
     $("#source").change(_generate_download_link);
