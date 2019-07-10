@@ -132,7 +132,7 @@ $(function () {
                 _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=xlsx", "Excel", "file excel outline");
                 _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=ods", "OpenDocument Spreadsheet", "file alternate");
                 _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=csv", "CSV", "file alternate outline");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=csv", "TSV", "file alternate outline");
+                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=tsv", "TSV", "file alternate outline");
                 break;
             case "presentation":
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/preview", "Preview", "play circle");
