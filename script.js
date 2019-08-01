@@ -140,7 +140,7 @@ $(function () {
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/copy", "Copy", "copy");
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pdf", "PDF", "file pdf outline");
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pptx", "Power Point", "file powerpoint outline");
-                _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export/odp", "OpenDocument Presentation", "file alternate");
+                _create_link("https://docs.google.com/presentation/d/" + _id + "/export/odp", "OpenDocument Presentation", "file alternate");
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/txt", "Text", "file alternate outline");
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/jpeg", "JPEG", "file image outline");
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/png", "PNG", "file image outline");
