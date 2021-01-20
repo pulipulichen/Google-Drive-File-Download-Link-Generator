@@ -71,9 +71,9 @@ $(function () {
     <i class="copy icon"></i>
     COPY LINK
   </a>
-  <a class="ui button" href="https://u.nu/api.php?action=shorturl&format=simple&url=` + encodeURIComponent( _link ) + `" target="_blank">
+  <a class="ui button shorten-url">
     <i class="compress icon"></i>
-    SHORTEN LINK
+    <span>BUILD SHORTEN LINK</span>
   </a>
   <a class="ui button" href="` + _link + `" target="_blank">
     <i class="external alternate icon"></i>
@@ -86,6 +86,32 @@ $(function () {
           // <a class="ui button" href="https://u.nu/api.php?action=shorturl&format=simple&url=` + encodeURIComponent( _link ) + `" target="_blank">SHORTEN LINK</a>
            
             _output.append(_ele)
+            
+            
+let requestHeaders = {
+  "Content-Type": "application/json",
+  "apikey": "9b9210f35e9149a8ab698d3414824f8a",
+  "workspace": "Main Workspace"
+}
+            _ele.find('.shorten-url').click(function () {
+              let $this = $(this)
+              let linkRequest = $this.parents('.field:first').find('.main-link').attr('href');
+              
+              $.ajax({
+                url: "https://api.rebrandly.com/v1/links",
+                type: "post",
+                data: JSON.stringify(linkRequest),
+                headers: requestHeaders,
+                dataType: "json",
+                success: (link) => {
+                  console.log(`Long URL was ${link.destination}, short URL is ${link.shortUrl}`);
+                  
+                  $this.attr('target', '_blank')
+                       .attr('href', link.shortUrl)
+                       .find('span').text('SHORT LINK')
+                }
+              });
+            })
             
             _ele.find(".copy").click(function () {
                 var _val = $(this).parents('.field:first').find('.main-link').attr('href');
