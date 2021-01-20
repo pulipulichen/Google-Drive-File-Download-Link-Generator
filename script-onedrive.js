@@ -70,9 +70,9 @@ $(function () {
     <i class="copy icon"></i>
     COPY LINK
   </a>
-  <a class="ui button" href="http://tinyurl.com/create.php?url=` + encodeURIComponent( _link ) + `" target="_blank">
+  <a class="ui button shorten-url">
     <i class="compress icon"></i>
-    SHORTEN LINK
+    <span>BUILD SHORTEN LINK</span>
   </a>
   <a class="ui button" href="` + _link + `" target="_blank">
     <i class="external alternate icon"></i>
@@ -88,9 +88,52 @@ $(function () {
             
             _ele.find(".copy").click(function () {
                 var _val = $(this).parents('.field:first').find('.main-link').attr('href');
-                console.log(_val);
-                PULI_UTIL.clipboard.copy(_val);
+                //console.log(_val);
+                //PULI_UTIL.clipboard.copy(_val);
+                ClipboardUtils.copyPlainString(_val)
             });
+            
+            let requestHeaders = {
+        "Content-Type": "application/json",
+        "apikey": "9b9210f35e9149a8ab698d3414824f8a",
+        "workspace": "a558a5903496421999ab6005ca11f7d1"
+      }
+            
+            _ele.find('.shorten-url').click(function () {
+              let $this = $(this)
+              
+              if ($this.hasClass('shortened')) {
+                return false
+              }
+              //let linkRequest = 
+              
+              let linkRequest = {
+                destination: $this.parents('.field:first').find('.main-link').attr('href'),
+                domain: { fullName: "rebrand.ly" }
+                //, slashtag: "A_NEW_SLASHTAG"
+                //, title: "Rebrandly YouTube channel"
+              }
+
+              
+              $.ajax({
+                url: "https://api.rebrandly.com/v1/links",
+                type: "post",
+                data: JSON.stringify(linkRequest),
+                headers: requestHeaders,
+                dataType: "json",
+                success: (link) => {
+                  //console.log(`Long URL was ${link.destination}, short URL is ${link.shortUrl}`);
+                  
+                  $this.attr('target', '_blank')
+                       .attr('href', 'https://' + link.shortUrl)
+                       .find('span').text('SHORT LINK')
+               
+                  ClipboardUtils.copyPlainString('https://' + link.shortUrl)
+                  
+                  $this.addClass('shortened')
+                }
+              });
+            })
             
             /*
             _ele.find(".shorten").click(function () {
