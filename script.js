@@ -91,11 +91,23 @@ $(function () {
 let requestHeaders = {
   "Content-Type": "application/json",
   "apikey": "9b9210f35e9149a8ab698d3414824f8a",
-  "workspace": "Main Workspace"
+  "workspace": "a558a5903496421999ab6005ca11f7d1"
 }
             _ele.find('.shorten-url').click(function () {
               let $this = $(this)
-              let linkRequest = $this.parents('.field:first').find('.main-link').attr('href');
+              
+              if ($this.hasClass('shortened')) {
+                return false
+              }
+              //let linkRequest = 
+              
+              let linkRequest = {
+                destination: $this.parents('.field:first').find('.main-link').attr('href'),
+                domain: { fullName: "rebrand.ly" }
+                //, slashtag: "A_NEW_SLASHTAG"
+                //, title: "Rebrandly YouTube channel"
+              }
+
               
               $.ajax({
                 url: "https://api.rebrandly.com/v1/links",
@@ -104,11 +116,15 @@ let requestHeaders = {
                 headers: requestHeaders,
                 dataType: "json",
                 success: (link) => {
-                  console.log(`Long URL was ${link.destination}, short URL is ${link.shortUrl}`);
+                  //console.log(`Long URL was ${link.destination}, short URL is ${link.shortUrl}`);
                   
                   $this.attr('target', '_blank')
-                       .attr('href', link.shortUrl)
+                       .attr('href', 'https://' + link.shortUrl)
                        .find('span').text('SHORT LINK')
+               
+                  ClipboardUtils.copyPlainString('https://' + link.shortUrl)
+                  
+                  $this.addClass('shortened')
                 }
               });
             })
