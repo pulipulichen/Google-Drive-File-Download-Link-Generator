@@ -1,3 +1,5 @@
+/* global PULI_UTIL, ClipboardUtils */
+
 $(function () {
 
     var _generate_download_link = function () {
@@ -87,8 +89,9 @@ $(function () {
             
             _ele.find(".copy").click(function () {
                 var _val = $(this).parents('.field:first').find('.main-link').attr('href');
-                console.log(_val);
-                PULI_UTIL.clipboard.copy(_val);
+                //console.log(_val);
+                //PULI_UTIL.clipboard.copy(_val);
+                ClipboardUtils.copyPlainString(_val)
             });
             
             /*
@@ -124,6 +127,7 @@ $(function () {
                 _create_link("https://docs.google.com/document/d/" + _id + "/export?format=txt", "Text", "file alternate outline");
                 _create_link("https://docs.google.com/document/d/" + _id + "/export?format=html", "HTML", "html5");
                 _create_link("https://docs.google.com/document/d/" + _id + "/export?format=epub", "EPUB", "book");
+                _create_link("https://drive.google.com/thumbnail?id=" + _id + '&sz=w1600-h1600', "預覽", "image");
                 break;
             case "spreadsheets":
                 _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/preview", "Preview", "play circle");
@@ -133,6 +137,7 @@ $(function () {
                 _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=ods", "OpenDocument Spreadsheet", "file alternate");
                 _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=csv", "CSV", "file alternate outline");
                 _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=tsv", "TSV", "file alternate outline");
+                _create_link("https://drive.google.com/thumbnail?id=" + _id + '&sz=w1600-h1600', "預覽", "image");
                 break;
             case "presentation":
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/preview", "Preview", "play circle");
@@ -145,9 +150,11 @@ $(function () {
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/jpeg", "JPEG", "file image outline");
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/png", "PNG", "file image outline");
                 _create_link("https://docs.google.com/presentation/d/" + _id + "/export/svg", "SVG", "file image outline");
+                _create_link("https://drive.google.com/thumbnail?id=" + _id + '&sz=w1600-h1600', "預覽", "image");
                 break;
             default:
                 _create_link("https://drive.google.com/uc?export=download&id=" + _id, "原始", "file alternate outline");
+                _create_link("https://drive.google.com/thumbnail?id=" + _id + '&sz=w1600-h1600', "預覽", "image");
         }
     };
 
