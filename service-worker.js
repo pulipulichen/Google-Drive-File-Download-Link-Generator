@@ -16,7 +16,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-v2021-0121-033747';
+const PRECACHE = 'precache-v2021-0707-033747';
 const RUNTIME = 'runtime';
 
 /**
@@ -71,7 +71,11 @@ const PRECACHE_URLS = [
   'lib/semantic-ui/themes/default/assets/fonts/icons.ttf',
   'lib/semantic-ui/themes/default/assets/fonts/icons.woff',
   'lib/semantic-ui/themes/default/assets/fonts/icons.woff2',
-  'scripts/service-worker-loader.js'
+  'scripts/service-worker-loader.js',
+  'scripts/createEditLink.js',
+  'scripts/createLink.js',
+  'scripts/ga.js',
+  'scripts/typeDetect.js',
 ];
 
 // The install handler takes care of precaching the resources we always need.

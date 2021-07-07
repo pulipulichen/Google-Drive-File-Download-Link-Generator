@@ -1,0 +1,151 @@
+
+/* global ClipboardUtils */
+
+function parseEditLink (_rawLink, _type) {
+  console.log(_rawLink)
+  if (_rawLink.endsWith('/preview')
+          || _rawLink.endsWith('/copy')
+          || _rawLink.endsWith('/present')) {
+    return _rawLink.slice(0, _rawLink.lastIndexOf('/')) + '/edit?usp=sharing'
+  }
+  if (_rawLink.indexOf('/export/') > -1) {
+    return _rawLink.slice(0, _rawLink.indexOf('/export/')) + '/edit?usp=sharing'
+  }
+  if (_rawLink.indexOf('/export?formate=') > -1) {
+    return _rawLink.slice(0, _rawLink.indexOf('/export?formate=')) + '/edit?usp=sharing'
+  }
+  
+  return _rawLink
+}
+
+// -----------
+
+function createEditLink(_rawLink, _type, _output) {
+  
+  let _link = parseEditLink(_rawLink, _type)
+  let _format = _type
+  
+  var _msg = '開啟' + _type + '檔案';
+  let _image = 'file alternate'
+  
+  if (_type === 'document') {
+    _image = 'file word outline'
+  }
+  else if (_type === 'spreadsheets') {
+    _image = 'file excel outline'
+  }
+  else if (_type === 'presentation') {
+    _image = 'file powerpoint outline'
+  }
+  
+  if (_image !== undefined) {
+    //_image = '<i class="fa ' + _image + '" aria-hidden="true"></i>';
+    // <i class="external alternate icon"></i>
+    _image = '<i class="' + _image + ' icon"></i>'
+  }
+  
+  /*
+   _output.append('<span>' 
+   + '<a href="' + _link + '" target="_blank">' + _image + _msg +  '</a>' 
+   + '<button type="button" class="ui button copy">COPY</button>'
+   + '<a class="shorten-link" href="https://u.nu/?url=' + encodeURIComponent( _link ) + '" target="_blank"><button type="button" class="ui button shorten">SHORTEN</button></a>'
+   + '</span>');
+   _output.append('<input type="text" style="width: 100%;" value="' + _link + '" onfocus="this.select()" />');
+   */
+  var _ele = $(`
+            <div class="field link-row">
+            <label><a class="main-link" href="` + _link + `" target="_blank">` + _image + _msg + `</a></label>
+<div class="three ui basic labeled icon  buttons">
+  <a class="ui blue button copy">
+    <i class="copy icon"></i>
+    COPY LINK
+  </a>
+  <a class="ui button shorten-url">
+    <i class="compress icon"></i>
+    <span>BUILD SHORTEN LINK</span>
+  </a>
+  <a class="ui button" href="` + _link + `" target="_blank">
+    <i class="external alternate icon"></i>
+    OPEN ` + _format + `
+  </a>
+</div>
+<input type="text" class="display-link" value="` + _link + `" onfocus="this.select()" />
+</div>`)
+
+  // <a class="ui button" href="https://u.nu/api.php?action=shorturl&format=simple&url=` + encodeURIComponent( _link ) + `" target="_blank">SHORTEN LINK</a>
+
+  _output.append(_ele)
+
+
+  let requestHeaders = {
+    "Content-Type": "application/json",
+    "apikey": "9b9210f35e9149a8ab698d3414824f8a",
+    "workspace": "a558a5903496421999ab6005ca11f7d1"
+  }
+
+
+  _ele.find('.shorten-url').click(function () {
+    let $this = $(this)
+
+    if ($this.hasClass('shortened')) {
+      return false
+    }
+    //let linkRequest = 
+
+    let linkRequest = {
+      destination: $this.parents('.field:first').find('.main-link').attr('href'),
+      domain: {fullName: "rebrand.ly"}
+      //, slashtag: "A_NEW_SLASHTAG"
+      //, title: "Rebrandly YouTube channel"
+    }
+
+
+    $.ajax({
+      url: "https://api.rebrandly.com/v1/links",
+      type: "post",
+      data: JSON.stringify(linkRequest),
+      headers: requestHeaders,
+      dataType: "json",
+      success: (link) => {
+        //console.log(`Long URL was ${link.destination}, short URL is ${link.shortUrl}`);
+
+        $this.attr('target', '_blank')
+                .attr('href', 'https://' + link.shortUrl)
+                .find('span').text('SHORT LINK')
+
+        ClipboardUtils.copyPlainString('https://' + link.shortUrl)
+
+        $this.addClass('shortened')
+      }
+    });
+  })
+
+  _ele.find(".copy").click(function () {
+    var _val = $(this).parents('.field:first').find('.main-link').attr('href');
+    //console.log(_val);
+    //PULI_UTIL.clipboard.copy(_val);
+    ClipboardUtils.copyPlainString(_val)
+  });
+
+  /*
+   _ele.find(".shorten").click(function () {
+   var _link_row = $(this).parents('.field:first')
+   var _val = _link_row.find('.main-link').attr('href');
+   var _display_shorten_link = _link_row.find('.display-link-shorten-link')
+   var _url = 'https://u.nu/api.php?action=shorturl&format=simple&url=' + encodeURIComponent( _link )
+   
+   $.get(_url, function (_short_url) {
+   _display_shorten_link.val(_short_url)
+   _link_row.addClass('show-shorten-link')
+   })
+   //_display_shorten_link.val(_url)
+   //_link_row.addClass('show-shorten-link')
+   
+   //console.log(_val);
+   //PULI_UTIL.clipboard.copy(_val);
+   });
+   */
+}
+
+
+// -----------
