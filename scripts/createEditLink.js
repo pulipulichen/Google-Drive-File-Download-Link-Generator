@@ -2,7 +2,7 @@
 /* global ClipboardUtils */
 
 function parseEditLink (_rawLink, _type) {
-  console.log(_rawLink)
+  //console.log(_rawLink)
   if (_rawLink.endsWith('/preview')
           || _rawLink.endsWith('/copy')
           || _rawLink.endsWith('/present')) {
@@ -11,8 +11,8 @@ function parseEditLink (_rawLink, _type) {
   if (_rawLink.indexOf('/export/') > -1) {
     return _rawLink.slice(0, _rawLink.indexOf('/export/')) + '/edit?usp=sharing'
   }
-  if (_rawLink.indexOf('/export?formate=') > -1) {
-    return _rawLink.slice(0, _rawLink.indexOf('/export?formate=')) + '/edit?usp=sharing'
+  if (_rawLink.indexOf('/export?format=') > -1) {
+    return _rawLink.slice(0, _rawLink.indexOf('/export?format=')) + '/edit?usp=sharing'
   }
   
   return _rawLink
