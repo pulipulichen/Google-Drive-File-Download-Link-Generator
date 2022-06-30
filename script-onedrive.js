@@ -94,11 +94,16 @@ $(function () {
             });
             
             let requestHeaders = {
-        "Content-Type": "application/json",
-        "apikey": "9b9210f35e9149a8ab698d3414824f8a",
-        "workspace": "a558a5903496421999ab6005ca11f7d1"
-      }
+              "Content-Type": "application/json",
+              "apikey": "9b9210f35e9149a8ab698d3414824f8a",
+              "workspace": "a558a5903496421999ab6005ca11f7d1"
+            }
             
+            /**
+             * @author Pulipuli Chen 20220630-1020 
+             * 因為rebrandly無法使用，我們要更換了
+             */
+            /*
             _ele.find('.shorten-url').click(function () {
               let $this = $(this)
               
@@ -134,6 +139,30 @@ $(function () {
                 }
               });
             })
+            */
+
+            _ele.find('.shorten-url').click(async function (event) {
+              let $this = $(this)
+          
+              if ($this.hasClass('shortened')) {
+                return false
+              }
+          
+              let linkRequest = $this.parents('.field:first').find('.main-link').attr('href')
+              let shortUrl = await TinyURLAPI(linkRequest)
+              $this.attr('target', '_blank')
+                      .attr('href', shortUrl)
+                      .find('span').text('SHORT LINK')
+          
+              ClipboardUtils.copyPlainString(shortUrl)
+          
+              $this.addClass('shortened')
+              $this.parents(".link-row:first").find('input.display-link:first').val(shortUrl)
+
+              event.preventDefault()
+              event.stopPropagation()
+            })
+            
             
             /*
             _ele.find(".shorten").click(function () {
@@ -168,7 +197,7 @@ $(function () {
         }
     };
 
-    $("#source").change(_generate_download_link);
+    //$("#source").change(_generate_download_link);
     $("#source").keyup(_generate_download_link);
     
   //$("#source").val(`<iframe src="https://onedrive.live.com/embed?cid=6BA2FBE8DE6717A9&resid=6BA2FBE8DE6717A9%214820&authkey=AE1IF5SimCEAofI&em=2" width="476" height="288" frameborder="0" scrolling="no"></iframe>`)

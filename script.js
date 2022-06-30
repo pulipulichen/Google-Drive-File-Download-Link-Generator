@@ -80,6 +80,8 @@ var _generate_download_link = function () {
       _create_link("https://drive.google.com/uc?export=download&id=" + _id, "原始", "file alternate outline", _output);
       _create_link("https://drive.google.com/thumbnail?id=" + _id + '&sz=w1600-h1600', "預覽", "image", _output);
   }
+
+  // console.trace('產生完了')
 };
 
 
@@ -89,7 +91,7 @@ var _generate_download_link = function () {
 
 let init = () => {
   $(() => {
-    $("#google_drive_share_link_20160926").change(_generate_download_link);
+    //$("#google_drive_share_link_20160926").change(_generate_download_link);
     $("#google_drive_share_link_20160926").keyup(_generate_download_link);
   })
 }

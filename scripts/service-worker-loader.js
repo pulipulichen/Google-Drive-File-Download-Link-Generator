@@ -1,4 +1,8 @@
 let enableSeviceWorker = true
+
+if (location.href.startsWith('http://127.0.0.1')) {
+  enableSeviceWorker = false
+}
 //enableSeviceWorker = false
 if ('serviceWorker' in navigator && enableSeviceWorker) {
   navigator.serviceWorker.register('./service-worker.js')
