@@ -54,20 +54,20 @@ var _generate_download_link = function () {
       _create_link("https://drive.google.com/thumbnail?id=" + _id + '&sz=w1600-h1600', "預覽", "image", _output);
       break;
     case "spreadsheets":
+      _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=ods", "OpenDocument Spreadsheet", "file alternate", _output);
       _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/preview", "Preview", "play circle", _output);
       _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/copy", "Copy", "copy", _output);
       _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=pdf", "PDF", "file pdf outline", _output);
       _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=xlsx", "Excel", "file excel outline", _output);
-      _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=ods", "OpenDocument Spreadsheet", "file alternate", _output);
       _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=csv", "CSV", "file alternate outline", _output);
       _create_link("https://docs.google.com/spreadsheets/d/" + _id + "/export?format=tsv", "TSV", "file alternate outline", _output);
       _create_link("https://drive.google.com/thumbnail?id=" + _id + '&sz=w1600-h1600', "預覽", "image");
       break;
     case "presentation":
+      _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pdf", "PDF", "file pdf outline", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/preview", "Preview", "play circle", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/present", "Present", "play circle", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/copy", "Copy", "copy", _output);
-      _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pdf", "PDF", "file pdf outline", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pptx", "Power Point", "file powerpoint outline", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/export/odp", "OpenDocument Presentation", "file alternate", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/export/txt", "Text", "file alternate outline", _output);
