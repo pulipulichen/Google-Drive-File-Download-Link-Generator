@@ -11,12 +11,16 @@ $(function () {
         var link_type = 'iframe'
         var _preview_link, _edit_link, _download_link
 
-        if (_link.indexOf("https://onedrive.live.com/embed?cid=") > 0) {
+        // <iframe src="https://onedrive.live.com/embed?resid=6BA2FBE8DE6717A9%216513&authkey=!APIzr8F6kZQ2sMI" width="98" height="120" frameborder="0" scrolling="no"></iframe>
+        if ( (_link.indexOf("https://onedrive.live.com/embed?cid=") > 0) || (_link.indexOf("https://onedrive.live.com/embed?resid=") > 0) ) {
           // 先找到/d/的位置
           var _startPos = _link.indexOf("https://onedrive.live.com/embed?cid=");
           if (_startPos === -1) {
+            _startPos = _link.indexOf("https://onedrive.live.com/embed?resid=");
+            if (_startPos === -1) {
               _output.html("This is not OneDrive embedded code.");
               return;
+            }
           }
 
           var _endPos = _link.indexOf('" width="', _startPos);
