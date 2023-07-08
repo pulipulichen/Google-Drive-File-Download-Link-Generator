@@ -65,10 +65,10 @@ var _generate_download_link = function () {
       break;
     case "presentation":
       _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pdf", "PDF", "file pdf outline", _output);
+      _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pptx", "Power Point", "file powerpoint outline", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/preview", "Preview", "play circle", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/present", "Present", "play circle", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/copy", "Copy", "copy", _output);
-      _create_link("https://docs.google.com/presentation/d/" + _id + "/export/pptx", "Power Point", "file powerpoint outline", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/export/odp", "OpenDocument Presentation", "file alternate", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/export/txt", "Text", "file alternate outline", _output);
       _create_link("https://docs.google.com/presentation/d/" + _id + "/export/jpeg", "JPEG", "file image outline", _output);
