@@ -43,9 +43,9 @@ var _generate_download_link = function () {
   switch (_type) {
     case "document":
       _create_link("https://docs.google.com/document/d/" + _id + "/export?format=odt", "OpenDocument Text", "file alternate", _output);
+      _create_link("https://docs.google.com/document/d/" + _id + "/export?format=pdf", "PDF", "file pdf outline", _output);
       _create_link("https://docs.google.com/document/d/" + _id + "/preview", "Preview", "play circle", _output);
       _create_link("https://docs.google.com/document/d/" + _id + "/copy", "Copy", "copy", _output);
-      _create_link("https://docs.google.com/document/d/" + _id + "/export?format=pdf", "PDF", "file pdf outline", _output);
       _create_link("https://docs.google.com/document/d/" + _id + "/export?format=doc", "Word", "file word outline", _output);
       _create_link("https://docs.google.com/document/d/" + _id + "/export?format=rtf", "Rich Text Format", "file alternate", _output);
       _create_link("https://docs.google.com/document/d/" + _id + "/export?format=txt", "Text", "file alternate outline", _output);
